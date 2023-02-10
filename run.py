@@ -8,6 +8,14 @@ def create_user(username,password):
     new_user = User(username,password)
     return new_user
 
+
+def create_credential(username, password):
+    '''
+    Function to create a new credential
+    '''
+    new_credential = Credentials(username, password)
+    return new_credential
+
 def save_credential(credential):
     '''
     Function to save contact
@@ -25,3 +33,11 @@ def display_credential():
     Function that returns all the saved credentials
     '''
     return Credentials.display_credentials()
+
+
+def main():
+    print("Hello Welcome to your Password Locker. What is your name?")
+    
+    user_name = input()
+
+    print(f"Hello {user_name}. What would you like to do?")
