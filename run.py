@@ -8,6 +8,11 @@ def create_user(username,password):
     new_user = User(username,password)
     return new_user
 
+def save_user(user):
+    '''
+    Function to save a new user
+    '''
+    user.save_user()
 
 def create_credential(username, password):
     '''
@@ -44,4 +49,54 @@ def main():
     print(f"Hello {user_name}. What would you like to do?")
 
     while True:  #Since True always evaluates to True, the loop will run indefinitely, until something within the loop returns or breaks.
-        print("Use the short codes : cu - create a new user account, cc - create new credential, sc - save credential,  dc - display credential, del - delete credential")
+        print("Use the short codes : cu - create a new user account, cc - create new credential, sc - save credential,  dc - display credential, del - delete credential, ex - exit")
+
+        short_code = input().lower()
+        if short_code == "cu":
+            print("New User")
+            print("-"*10)
+
+            print("Username...")
+
+            user_name = input()
+
+            print("Password...")
+            pass_word = input()
+
+            save_user(create_user(user_name, pass_word)) #create and save new user
+            print ('\n')
+
+        elif short_code == "cc":
+            print("New Credential")
+            print("-"*10)
+            print("Username...")
+
+            user_name = input()
+
+            print("Password...")
+            pass_word = input()
+
+            save_credential(create_credential(user_name, pass_word)) #create and save new credential
+            print ('\n')
+
+        elif short_code == "dc":
+            if display_credential():
+                print("Hear's a list of your credentials")
+                print('\n')
+
+                for credential in display_credential():
+                    print(f"{credential.username} {credential.password}")
+                    print('\n')
+            else:
+                print('\n')
+                print("You don't seem to have any credential saved yet")
+                print('\n')
+        elif short_code == "del":
+                  print("Delete credential")
+                  print('\n')
+
+        elif short_code == 'ex':
+            print("Bye.....")
+            break
+        else:
+            print("I didn't really get that. Please use the short codes")
