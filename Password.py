@@ -36,12 +36,14 @@ class Credentials:
         '''
         Credentials.credentials_list.append(self)
 
-    def delete_credential(self):
+    # def delete_credential(self, username):
         '''
         delete_credential method deletes from credential list
         '''
-        Credentials.credentials_list.remove(self)
-
+        # self.credentials_list.remove(username)
+        # self.credentials_list.remove('pass' + str(self.credentials_list.index(username) //2))
+    def delete_credential(self, index):
+        del self.credentials_list[index]
     @classmethod
     def display_credentials(cls):
         '''

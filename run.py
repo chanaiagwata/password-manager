@@ -1,6 +1,14 @@
 #!/usr/bin/env python3.10
 from Password import User, Credentials
 
+creds = Credentials('my_username', 'my_password')
+
+def __init__(self, username=None, password=None):
+    if username is None:
+        self.credentials_list = []
+    else:
+        self.credentials_list = [username, password]
+        
 def create_user(username,password):
     '''
     Function to create a new user
@@ -27,11 +35,15 @@ def save_credential(credential):
     '''
     credential.save_credential()
 
-def del_credential(credential):
+def del_credential(index):
     '''
     Function to delete a credential
     '''
-    credential.delete_credential()
+    print("Before deletion:", Credentials.credentials_list)
+
+    print("After deletion:", Credentials.credentials_list[index])
+    
+
 
 def display_credential():
     '''
@@ -92,11 +104,20 @@ def main():
                 print("You don't seem to have any credential saved yet")
                 print('\n')
         elif short_code == "del":
-                  print("Delete credential")
-                  print('\n')
+            print("Delete credential")
+            print("-" * 10)
+            print("Index")
+            index = int(input())
+            creds.delete_credential(index)
+            print('\n')
 
         elif short_code == 'ex':
             print("Bye.....")
             break
         else:
             print("I didn't really get that. Please use the short codes")
+
+
+if __name__ == '__main__':
+
+    main()
