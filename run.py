@@ -6,6 +6,7 @@ creds = Credentials('my_username', 'my_password')
 def __init__(self, username=None, password=None):
     if username is None:
         self.credentials_list = []
+
     else:
         self.credentials_list = [username, password]
         
@@ -29,6 +30,16 @@ def create_credential(username, password):
     new_credential = Credentials(username, password)
     return new_credential
 
+def get_password():
+    """ Helper function to get a password from user"""
+    print("Password (leave blank to generate a random pasword)...")
+
+    password = input().strip()
+    if not password:
+        return None #User wants to generate a random password
+    else:
+        return password
+
 def save_credential(credential):
     '''
     Function to save contact
@@ -51,6 +62,15 @@ def display_credential():
     '''
     return Credentials.display_credentials()
 
+# def display_credential():
+#     '''
+#     Function that returns all the saved credentials
+#     '''
+#     credentials = Credentials.display_credentials()
+#     if not credentials:
+#         return None
+#     else:
+#         return credentials
 
 
 def main():
@@ -78,31 +98,71 @@ def main():
             save_user(create_user(user_name, pass_word)) #create and save new user
             print ('\n')
 
+        # elif short_code == "cc":
+        #     print("New Credential")
+        #     print("-"*10)
+        #     print("Username...")
+
+        #     user_name = input()
+
+        #     print("Password...")
+        #     pass_word = input()
+
+        #     save_credential(create_credential(user_name, pass_word)) #create and save new credential
+        #     print ('\n')
+
         elif short_code == "cc":
             print("New Credential")
-            print("-"*10)
+            print("-" * 10)
+            print("Platform")
+            platform = input().strip()
             print("Username...")
+            username = input().strip()
+            password = get_password()
+            creds.create_credential(platform, username, password)
 
-            user_name = input()
+      
+        # elif short_code == "dc":
+        #     if display_credential():
+        #         print("Hear's a list of your credentials")
+        #         print('\n')
 
-            print("Password...")
-            pass_word = input()
+        #         for credential in display_credential():
+        #             print(f"{credential.username} {credential.password}")
+        #             print('\n')
+        #     else:
+        #         print('\n')
+        #         print("You don't seem to have any credential saved yet")
+        #         print('\n')
 
-            save_credential(create_credential(user_name, pass_word)) #create and save new credential
-            print ('\n')
-
-        elif short_code == "dc":
+        elif short_code =="dc":
+            
             if display_credential():
-                print("Hear's a list of your credentials")
+                print("Here is a list of your credentials")
                 print('\n')
-
+                
+                    # print(f"Platform: {credential.platform}")
                 for credential in display_credential():
-                    print(f"{credential.username} {credential.password}")
+                    print(credential)
                     print('\n')
             else:
                 print('\n')
                 print("You don't seem to have any credential saved yet")
+                    
                 print('\n')
+            # if display_credential():
+            #     print("Here's a list of your credentials")
+            #     print('\n')
+
+            #     for credential in display_credential():
+            #         print(f"Platform: {credential.platform}")
+            #         print(f"Username: {credential.username}")
+            #         print(f"Password: {credential.password}")
+            #         print('\n')
+
+            #     else:
+            #         print("You don't seem to have any credentials saved yet")
+            
         elif short_code == "del":
             print("Delete credential")
             print("-" * 10)
